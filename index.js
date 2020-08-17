@@ -3,6 +3,7 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
+app.use(express.static('public'));
 
 
 app.get('/products',  async function(_request, response){
@@ -29,6 +30,7 @@ app.get('/products',  async function(_request, response){
       category: product.metadata.category,
       currency: product.price.currency,
       price_cents: product.price.unit_amount,
+      price_id: product.price.id,
     }
   });
 
